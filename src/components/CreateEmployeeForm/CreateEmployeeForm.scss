@@ -1,0 +1,46 @@
+.createEmployeeForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  background-color: rgb(194, 211, 194);
+  @media screen and (min-width: 768px) {
+    width: 50%;
+    margin: 0 auto;
+    padding: 50px;
+  }
+  input {
+    width: 200px;
+  }
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+    }
+  }
+  input {
+    margin-bottom: 10px;
+  }
+  &__submitBtn {
+    align-self: center;
+    padding: 10px 50px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+}
+.fieldsetAddress {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  legend {
+    font-size: 14px;
+    font-weight: 500;
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+    }
+  }
+}
