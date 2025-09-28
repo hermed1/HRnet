@@ -1,0 +1,80 @@
+OC P14 — HRNet (WealthHealth) — Project Brief (Concise)
+
+1) Context & Need
+- Client: WealthHealth (fictional). Internal HR app “HRnet” built with jQuery causes bugs and poor UX. The team is refactoring to React.
+- Objective: modernize HRnet, reduce tech debt, and improve performance/UX.
+
+2) Main Goals (must-have)
+- Convert the entire HRnet front-end to React (no jQuery left).
+- Replace the 4 jQuery plugins with React equivalents:
+  • date picker
+  • modal dialog
+  • select (dropdown)
+  • data table
+- Build ONE of these as your own reusable React component/library and PUBLISH it on npm.
+- Implement application state management (e.g., Redux/Context) instead of the old local storage.
+- Produce a performance report (Lighthouse) comparing old jQuery vs new React versions (before/after).
+- Keep functional parity with the original (at minimum the same pages and interactions).
+
+3) Scope — Functional Requirements
+A. Pages
+- “Create Employee” page: form to add a new employee.
+- “Employee List” page: table listing existing employees (supports typical DataTables features: sorting, search/filter, pagination).
+
+B. Create Employee — Fields & Behavior
+- Personal: First Name, Last Name, Date of Birth.
+- Start Date.
+- Address: Street, City, State (US 2-letter code), Zip Code.
+- Department: fixed set (e.g., Sales, Marketing, Engineering, Human Resources, Legal).
+- On submit: validate required fields; show confirmation modal; persist the new employee in app state; then visible in Employee List.
+
+C. Employee List — Table & Behavior
+- Display all employees with columns matching the form fields.
+- Sorting, search/filter, and pagination behavior similar to jQuery DataTables.
+- Optional: column-level search; state keeping (table state saved/restored).
+
+4) Technical Requirements & Constraints
+- Tech stack: React + Router; JS or TS; your choice of CSS (Sass/Tailwind/etc.).
+- State: Redux/RTK or React Context (must have a proper state system).
+- jQuery must be removed from the final app.
+- Your custom React plugin (datepicker/modal/select/table — choose ONE) must be packaged and published on npm (usable by others):
+  • clean API props, README (install, usage, props, examples), versioning
+  • no class-based components inside the library (functional components)
+  • built & bundled for npm consumption
+- Replace the 3 remaining jQuery plugins by React components (either coded by you or from reputable libraries).
+- Performance: run Lighthouse audits (production build) on old vs new; include key metrics and screenshots.
+- Accessibility & UX: labeled inputs, keyboard interactions for modal/select/date picker, focus management, error messages.
+- Testing: optional (manual tests acceptable); unit tests if time allows.
+- Deployment: optional live demo (e.g., GitHub Pages/Netlify/Vercel) OR at minimum clear run/build instructions.
+
+5) Deliverables (what reviewers expect to see)
+- GitHub repo of the full React HRnet app (README with setup, run, build).
+- npm package (for the converted plugin) + its GitHub repo.
+- TXT or README section listing URLs to:
+  • app repo (React)
+  • plugin repo (React library)
+  • npm package page
+- PDF or screenshots showing Lighthouse before/after (jQuery vs React) with a short interpretation.
+- Any design/implementation notes helpful for maintenance.
+
+6) Acceptance Criteria (checklist)
+- [ ] The app runs fully in React with feature parity (Create Employee + Employee List).
+- [ ] One former jQuery plugin is now a published React npm library, documented and versioned.
+- [ ] The other 3 plugin usages are replaced by React components; no jQuery remains.
+- [ ] State management is implemented; new employees persist for the session (and/or persisted locally if specified).
+- [ ] The form validates before submit; a confirmation modal appears on success.
+- [ ] The employee table supports sorting and search/filter (and pagination if the dataset grows).
+- [ ] Lighthouse report shows measurable improvements; results captured and included.
+- [ ] Repos and (optionally) live demo links are provided and clearly listed.
+- [ ] Codebase is readable, structured, and free of dead jQuery code.
+
+7) Non-Goals (out of scope unless specified)
+- Back-end/API, auth/roles, server-side persistence.
+- Complex design overhaul (visual refresh is allowed but not required).
+
+8) Notes for Implementers
+- Keep field labels, UI text, and pages IN ENGLISH (as in the original app).
+- Department is a business category (not a French geographic “département”).
+- For the table, if you don’t build your own, replicate DataTables’ common UX (sort/search/paginate).
+
+— End of brief —
