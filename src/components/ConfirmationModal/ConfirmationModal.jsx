@@ -5,7 +5,7 @@ import './ConfirmationModal.css';
 export default function ConfirmationModal({
                                               isOpen,
                                               title,
-                                              content,
+                                              children, // Changed from content
                                               onClose,
                                               size = 'md',
                                               closeOnOverlay = false,
@@ -94,9 +94,9 @@ export default function ConfirmationModal({
 
                     {title && <div className="confirmationModal__title">{title}</div>}
                 </div>
-                {content && <div className="confirmationModal__content__container">
+                {children && <div className="confirmationModal__content__container">
                     <div className="confirmationModal__content">
-                        {content}
+                        {children} 
                     </div>
                 </div>}
             </div>
