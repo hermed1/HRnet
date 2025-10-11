@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdClose, MdCheckCircle, MdInfo, MdWarningAmber, MdErrorOutline } from 'react-icons/md';
 import './ConfirmationModal.css';
 
@@ -13,15 +13,27 @@ export default function ConfirmationModal({
                                               scrollLock = true,
                                               tone = 'success',
                                               showIcon = true,
+                                              textAlign = 'center',
                                           }) {
+    const [isClosing, setIsClosing] = useState(false);
+
+    const handleClose = () => {
+        if (isClosing) return;
+        setIsClosing(true);
+        setTimeout(() => {
+            onClose?.();
+            setIsClosing(false);
+        }, 200);
+    };
+
     useEffect(() => {
         if (!isOpen || !closeOnEsc) return;
         const onKeyDown = (e) => {
-            if (e.key === 'Escape') onClose?.();
+            if (e.key === 'Escape') handleClose();
         };
         document.addEventListener('keydown', onKeyDown);
         return () => document.removeEventListener('keydown', onKeyDown);
-    }, [isOpen, closeOnEsc, onClose]);
+    }, [isOpen, closeOnEsc, onClose, isClosing]);
 
     useEffect(() => {
         if (!isOpen || !scrollLock) return;
@@ -43,50 +55,50 @@ export default function ConfirmationModal({
 
     const handleOverlayMouseDown = (e) => {
         if (!closeOnOverlay) return;
-        if (e.target === e.currentTarget) onClose?.();
+        if (e.target === e.currentTarget) handleClose();
     };
 
-const toneIcons = {
-    success :  MdCheckCircle,
-    info : MdInfo,
-    warning : MdWarningAmber,
-    danger : MdErrorOutline
-}
-const Icon = toneIcons[tone];
+    const toneIcons = {
+        success: MdCheckCircle,
+        info: MdInfo,
+        warning: MdWarningAmber,
+        danger: MdErrorOutline
+    }
+    const Icon = toneIcons[tone];
 
     return (
         <div
-            className="confirmationModal"
+            className={`confirmationModal ${isClosing ? 'closing' : ''}`}
             role="dialog"
             aria-modal="true"
             onMouseDown={handleOverlayMouseDown}
         >
-            <div className={`confirmationModal__card confirmationModal__card--${size} ${tone}`}>
+            <div className={`confirmationModal__card confirmationModal__card--${size} ${tone} confirmationModal__card--align-${textAlign}`}>
                 <div
                     className="confirmationModal__header">
-                        <button
-                            type="button"
-                            className="confirmationModal__close"
-                            onClick={onClose}
-                            aria-label="Fermer"
-                        >
-                            <MdClose size={30} />
-                        </button>
+                    <button
+                        type="button"
+                        className="confirmationModal__close"
+                        onClick={handleClose}
+                        aria-label="Fermer"
+                    >
+                        <MdClose size={30} />
+                    </button>
 
-                        {(showIcon && Icon) && (
-                            <div className={`confirmationModal__icon confirmationModal__icon--${tone} `}>
+                    {(showIcon && Icon) && (
+                        <div className={`confirmationModal__icon confirmationModal__icon--${tone} `}>
 
-                                <Icon size={24} />
-                            </div>
-                        )}
+                            <Icon size={24} />
+                        </div>
+                    )}
 
-                        {title && <div className="confirmationModal__title">{title}</div>}
+                    {title && <div className="confirmationModal__title">{title}</div>}
                 </div>
-                    {content && <div className="confirmationModal__content__container">
-                                    <div className="confirmationModal__content">
-                                        {content}
-                                    </div>
-                                </div>}
+                {content && <div className="confirmationModal__content__container">
+                    <div className="confirmationModal__content">
+                        {content}
+                    </div>
+                </div>}
             </div>
         </div>
     );
