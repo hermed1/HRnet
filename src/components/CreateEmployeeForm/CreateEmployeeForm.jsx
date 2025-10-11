@@ -8,6 +8,8 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { US_STATES } from '../../constants/usStates';
+import {useDispatch} from "react-redux";
+import { addEmployee } from '../../store/employeesSlice';
 
 export default function CreateEmployeeForm() {
   const [dateOfBirth, setDateOfBirth] = useState(null);
@@ -19,20 +21,23 @@ export default function CreateEmployeeForm() {
   const [zipCode, setZipCode] = useState('');
   const [state, setState] = useState('');
   const [department, setDepartment] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({
+    const newEmployee = {
       firstName,
       lastName,
-      dateOfBirth,
-      startDate,
+      dateOfBirth: dateOfBirth ? dateOfBirth.format('MM/DD/YYYY') : '',
+      startDate: startDate ? startDate.format('MM/DD/YYYY') : '',
       street,
       city,
       zipCode,
       state,
       department,
-    });
+    };
+    console.log('New Employee:', newEmployee);
+      dispatch(addEmployee(newEmployee));
   };
 
   return (
