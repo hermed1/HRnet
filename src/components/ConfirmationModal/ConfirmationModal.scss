@@ -1,0 +1,89 @@
+.confirmationModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.5);
+&__header{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px;
+  border-bottom: #6b7280 2px solid;
+}
+  &__icon{
+    position: absolute;
+    left: 20px;
+    top: 15px;
+  }
+  &__card {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 8px;
+    padding: 25px 0px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+    text-align: center;
+    color: #111;
+    width: 560px;
+    max-width: calc(100vw - 32px);
+  }
+&__title{
+  padding-bottom: 10px;
+}
+  &__content__container {
+    margin-top: 15px;
+    line-height: 1.4;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70%;
+  }
+
+  &__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    color: #555;
+    padding: 6px;
+    border-radius: 6px;
+    transition: background-color 160ms ease, color 160ms ease;
+    &:hover {
+      background: #f3f4f6;
+      color: #111;
+    }
+    &:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+  }
+}
+
+.confirmationModal__card--sm { width: 360px; height: fit-content; }
+.confirmationModal__card--md { width: 560px;   height: 150px; ;
+}
+.confirmationModal__card--lg { width: 800px; height: 360px  }
+.confirmationModal__card--lg .confirmationModal__content__container {
+  height: 90%;
+}
+
+.confirmationModal__icon { grid-area: icon; display: flex; align-items: center; }
+.confirmationModal__icon--neutral { color: #6b7280; }
+.confirmationModal__icon--info { color: #2563eb; }
+.confirmationModal__icon--success { color: #16a34a; }
+.confirmationModal__icon--warning { color: #d97706; }
+.confirmationModal__icon--danger { color: #dc2626; }
+
+.confirmationModal__card--neutral .confirmationModal__icon { color: #6b7280; }
+.confirmationModal__card--info .confirmationModal__icon--info { color: #2563eb; }
+.confirmationModal__card--success .confirmationModal__icon--success { color: #16a34a; }
+.confirmationModal__card--warning .confirmationModal__icon--warning { color: #d97706; }
+.confirmationModal__card--danger .confirmationModal__icon--d { color: #dc2626; }
