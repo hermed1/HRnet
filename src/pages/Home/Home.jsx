@@ -21,18 +21,18 @@ export default function Home() {
                            tone ="success"/>*/}
 
         {/* Nouvel exemple avec "children" pour un contenu riche */}
-        <ConfirmationModal isOpen={isOpen}
-                           onClose={() => setIsOpen(false)}
-                           size="md"
-                           title="Employé Créé !"
-                           tone="success"
-                           textAlign="left"
-        >
-            <p>L'employé a bien été enregistré dans le système.</p>
-            <p style={{ marginTop: '1rem', fontWeight: 'bold' }}>
-                Vous pouvez consulter la liste des employés <Link to='/employees' style={{ color: '#16a34a' }}>ici</Link>.
-            </p>
-        </ConfirmationModal>
+        {/*<ConfirmationModal isOpen={isOpen}*/}
+        {/*                   onClose={() => setIsOpen(false)}*/}
+        {/*                   size="md"*/}
+        {/*                   title="Employé Créé !"*/}
+        {/*                   tone="success"*/}
+        {/*                   textAlign="left"*/}
+        {/*>*/}
+        {/*    <p>L'employé a bien été enregistré dans le système.</p>*/}
+        {/*    <p style={{ marginTop: '1rem', fontWeight: 'bold' }}>*/}
+        {/*        Vous pouvez consulter la liste des employés <Link to='/employees' style={{ color: '#16a34a' }}>ici</Link>.*/}
+        {/*    </p>*/}
+        {/*</ConfirmationModal>*/}
 
     </div>
   );

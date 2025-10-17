@@ -10,6 +10,9 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { US_STATES } from '../../constants/usStates';
 import {useDispatch} from "react-redux";
 import { addEmployee } from '../../store/employeesSlice';
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
+import { Link } from 'react-router-dom';
+
 
 export default function CreateEmployeeForm() {
   const [dateOfBirth, setDateOfBirth] = useState(null);
@@ -22,6 +25,7 @@ export default function CreateEmployeeForm() {
   const [state, setState] = useState('');
   const [department, setDepartment] = useState('');
   const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,126 +42,150 @@ export default function CreateEmployeeForm() {
     };
     console.log('New Employee:', newEmployee);
       dispatch(addEmployee(newEmployee));
+      setIsOpen(true);
+      setFirstName('');
+      setLastName('');
+      setDateOfBirth(null);
+      setStartDate(null);
+      setStreet('');
+      setCity('');
+      setZipCode('');
+      setState('');
+      setDepartment('');
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <form action='' className='createEmployeeForm' onSubmit={handleSubmit}>
-        <label htmlFor='firstName'>First Name</label>
-        <input
-          type='text'
-          id='firstName'
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
-        />
+      <div>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <form action='' className='createEmployeeForm' onSubmit={handleSubmit}>
+            <label htmlFor='firstName'>First Name</label>
+            <input
+              type='text'
+              id='firstName'
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+            />
 
-        <label htmlFor='lastName'>Last Name</label>
-        <input
-          type='text'
-          id='lastName'
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
-        />
+            <label htmlFor='lastName'>Last Name</label>
+            <input
+              type='text'
+              id='lastName'
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
+            />
 
-        <label htmlFor='dateOfBirth'>Date of Birth</label>
-        <DatePicker
-          value={dateOfBirth}
-          onChange={(newValue) => setDateOfBirth(newValue)}
-          views={['year', 'month', 'day']}
-          dayOfWeekFormatter={(date) => dayjs(date).format('ddd')}
-          slotProps={{
-            textField: { id: 'dateOfBirth' },
-            actionBar: { actions: ['today'] },
-          }}
-        />
+            <label htmlFor='dateOfBirth'>Date of Birth</label>
+            <DatePicker
+              value={dateOfBirth}
+              onChange={(newValue) => setDateOfBirth(newValue)}
+              views={['year', 'month', 'day']}
+              dayOfWeekFormatter={(date) => dayjs(date).format('ddd')}
+              slotProps={{
+                textField: { id: 'dateOfBirth' },
+                actionBar: { actions: ['today'] },
+              }}
+            />
 
-        <label htmlFor='startDate'>Start date</label>
-        <DatePicker
-          views={['year', 'month', 'day']}
-          dayOfWeekFormatter={(date) => dayjs(date).format('ddd')}
-          slotProps={{
-            textField: { id: 'startDate' },
-            actionBar: { actions: ['today'] },
-          }}
-          onChange={(newValue) => setStartDate(newValue)}
-          value={startDate}
-        />
+            <label htmlFor='startDate'>Start date</label>
+            <DatePicker
+              views={['year', 'month', 'day']}
+              dayOfWeekFormatter={(date) => dayjs(date).format('ddd')}
+              slotProps={{
+                textField: { id: 'startDate' },
+                actionBar: { actions: ['today'] },
+              }}
+              onChange={(newValue) => setStartDate(newValue)}
+              value={startDate}
+            />
 
-        <fieldset className='fieldsetAddress'>
-          <legend>Address</legend>
-          <label htmlFor='street'>Street</label>
-          <input
-            type='text'
-            id='street'
-            onChange={(e) => setStreet(e.target.value)}
-            value={street}
-          />
-          <label htmlFor='city'>City</label>
-          <input
-            type='text'
-            id='city'
-            onChange={(e) => setCity(e.target.value)}
-            value={city}
-          />
-          <label htmlFor='zipCode'>Zip Code</label>
-          <input
-            type='text'
-            id='zipCode'
-            onChange={(e) => setZipCode(e.target.value)}
-            value={zipCode}
-          />
+            <fieldset className='fieldsetAddress'>
+              <legend>Address</legend>
+              <label htmlFor='street'>Street</label>
+              <input
+                type='text'
+                id='street'
+                onChange={(e) => setStreet(e.target.value)}
+                value={street}
+              />
+              <label htmlFor='city'>City</label>
+              <input
+                type='text'
+                id='city'
+                onChange={(e) => setCity(e.target.value)}
+                value={city}
+              />
+              <label htmlFor='zipCode'>Zip Code</label>
+              <input
+                type='text'
+                id='zipCode'
+                onChange={(e) => setZipCode(e.target.value)}
+                value={zipCode}
+              />
 
-          <FormControl fullWidth margin='normal' required>
-            {/* remplace value par défaut */}
-            <InputLabel id='state-label'>State</InputLabel>
-            <Select
-              labelId='state-label'
-              id='state'
-              name='state'
-              label='State'
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-            >
-              <MenuItem value='' disabled>
-                Select a state
-              </MenuItem>
-
-              {US_STATES.map((stateOption) => (
-                <MenuItem
-                  key={stateOption.abbreviation}
-                  value={stateOption.name}
+              <FormControl fullWidth margin='normal' required>
+                {/* remplace value par défaut */}
+                <InputLabel id='state-label'>State</InputLabel>
+                <Select
+                  labelId='state-label'
+                  id='state'
+                  name='state'
+                  label='State'
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
                 >
-                  {stateOption.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </fieldset>
-        <FormControl fullWidth margin='normal' required>
-          <InputLabel id='department-label'>Department</InputLabel>
-          <Select
-            labelId='department-label'
-            id='department'
-            name='department'
-            label='Department'
-            value={department}
-            onChange={(e) => setDepartment(e.target.value)}
-          >
-            <MenuItem value='' disabled>
-              Select a department
-            </MenuItem>
-            <MenuItem value='Sales'>Sales</MenuItem>
-            <MenuItem value='Marketing'>Marketing</MenuItem>
-            <MenuItem value='Engineering'>Engineering</MenuItem>
-            <MenuItem value='Human Resources'>Human Resources</MenuItem>
-            <MenuItem value='Legal'>Legal</MenuItem>
-          </Select>
-        </FormControl>
+                  <MenuItem value='' disabled>
+                    Select a state
+                  </MenuItem>
 
-        <button type='submit' className='createEmployeeForm__submitBtn'>
-          Save
-        </button>
-      </form>
-    </LocalizationProvider>
+                  {US_STATES.map((stateOption) => (
+                    <MenuItem
+                      key={stateOption.abbreviation}
+                      value={stateOption.name}
+                    >
+                      {stateOption.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </fieldset>
+            <FormControl fullWidth margin='normal' required>
+              <InputLabel id='department-label'>Department</InputLabel>
+              <Select
+                labelId='department-label'
+                id='department'
+                name='department'
+                label='Department'
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+              >
+                <MenuItem value='' disabled>
+                  Select a department
+                </MenuItem>
+                <MenuItem value='Sales'>Sales</MenuItem>
+                <MenuItem value='Marketing'>Marketing</MenuItem>
+                <MenuItem value='Engineering'>Engineering</MenuItem>
+                <MenuItem value='Human Resources'>Human Resources</MenuItem>
+                <MenuItem value='Legal'>Legal</MenuItem>
+              </Select>
+            </FormControl>
+
+            <button type='submit' className='createEmployeeForm__submitBtn'>
+              Save
+            </button>
+          </form>
+        </LocalizationProvider>
+      <ConfirmationModal isOpen={isOpen}
+                         onClose={() => setIsOpen(false)}
+                         size="md"
+                         title="Employé Créé !"
+                         tone="success"
+                         textAlign="left"
+      >
+          <p>L'employé a bien été enregistré dans le système.</p>
+          <p style={{ marginTop: '1rem', fontWeight: 'bold' }}>
+              Vous pouvez consulter la liste des employés <Link to='/employees' style={{ color: '#16a34a' }}>ici</Link>.
+          </p>
+      </ConfirmationModal>
+      </div>
   );
 }
