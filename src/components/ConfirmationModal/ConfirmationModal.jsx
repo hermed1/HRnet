@@ -96,7 +96,7 @@ export default function ConfirmationModal({
                 </div>
                 {children && <div className="confirmationModal__content__container">
                     <div className="confirmationModal__content">
-                        {children} 
+                        {children}
                     </div>
                 </div>}
             </div>

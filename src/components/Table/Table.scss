@@ -1,0 +1,104 @@
+// Fichier de style pour le composant Table : src/components/Table/Table.scss
+
+// Définition de variables pour une maintenance facile
+$table-bg-color: #ffffff;
+$header-bg-color: #f9fafb;
+$row-hover-bg-color: #f0f4ff;
+$row-striped-bg-color: #f9fafb;
+$border-color: #e5e7eb;
+$shadow-color: rgba(0, 0, 0, 0.05);
+$primary-text-color: #111827;
+$secondary-text-color: #6b7280;
+
+// Conteneur principal du tableau (Block BEM)
+.data-table {
+  width: 90%;
+  margin: 0 auto; // Centrer le tableau sur la page
+  padding: 1rem; // Un peu d'air sur mobile
+
+  // Sur les écrans plus grands
+  @media (min-width: 768px) {
+    padding: 1.5rem;
+  }
+
+  // --- Barre de recherche --- (Element BEM)
+  &__search {
+    margin-bottom: 1.5rem;
+  }
+
+  // --- Conteneur de la grille --- (Element BEM)
+  &__grid-container {
+    height: 650px; // Hauteur fixe pour la virtualisation du DataGrid
+    width: 100%;
+    // Le style est déplacé sur .MuiDataGrid-root pour inclure la toolbar
+  }
+}
+
+// Surcharge des styles internes de MUI DataGrid
+// On cible les classes via notre conteneur pour ne pas affecter d'autres DataGrids
+.data-table {
+  // Style général de la grille
+  .MuiDataGrid-root {
+    border: none; // On supprime la bordure par défaut, on gère avec le conteneur
+    font-family: inherit; // Utilise la police du site
+    color: $primary-text-color;
+
+    // On applique le style du conteneur directement ici
+    background-color: $table-bg-color;
+    border-radius: 0.75rem; // Bords plus arrondis
+    box-shadow: 0 4px 6px -1px $shadow-color, 0 2px 4px -2px $shadow-color;
+  }
+
+  // --- En-têtes de colonnes ---
+  .MuiDataGrid-columnHeaders {
+    background-color: $header-bg-color;
+    border-bottom: 1px solid $border-color;
+  }
+
+  .MuiDataGrid-columnHeaderTitle {
+    font-weight: 600; // Texte en gras
+    font-size: 0.875rem;
+  }
+
+  // Forcer la visibilité permanente de l'icône de tri
+  .MuiDataGrid-columnHeader .MuiDataGrid-sortIcon {
+    opacity: 1 !important;
+    color: $secondary-text-color;
+  }
+
+  // --- Cellules et Lignes ---
+  .MuiDataGrid-cell {
+    border-bottom: 1px solid $border-color; // Ligne de séparation fine
+  }
+
+  .MuiDataGrid-row {
+    // Effet de survol
+    &:hover {
+      background-color: $row-hover-bg-color;
+    }
+  }
+
+  // Lignes zébrées (striping)
+  .MuiDataGrid-row:nth-of-type(even) {
+    background-color: $row-striped-bg-color;
+    &:hover {
+      background-color: $row-hover-bg-color; // Garder le hover
+    }
+  }
+
+  // --- Pied de page (Pagination) ---
+  .MuiDataGrid-footerContainer {
+    background-color: $header-bg-color;
+    border-top: 1px solid $border-color;
+    color: $secondary-text-color;
+  }
+
+  // Supprimer les bordures inutiles sur les dernières lignes/cellules
+  .MuiDataGrid-cell,
+  .MuiDataGrid-columnHeader {
+    border-right: none;
+  }
+  .MuiDataGrid-row:last-child .MuiDataGrid-cell {
+    border-bottom: none;
+  }
+}

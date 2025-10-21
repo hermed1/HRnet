@@ -64,6 +64,7 @@ export default function CreateEmployeeForm() {
               id='firstName'
               onChange={(e) => setFirstName(e.target.value)}
               value={firstName}
+              required
             />
 
             <label htmlFor='lastName'>Last Name</label>
@@ -72,6 +73,7 @@ export default function CreateEmployeeForm() {
               id='lastName'
               onChange={(e) => setLastName(e.target.value)}
               value={lastName}
+              required
             />
 
             <label htmlFor='dateOfBirth'>Date of Birth</label>
@@ -81,7 +83,7 @@ export default function CreateEmployeeForm() {
               views={['year', 'month', 'day']}
               dayOfWeekFormatter={(date) => dayjs(date).format('ddd')}
               slotProps={{
-                textField: { id: 'dateOfBirth' },
+                textField: { id: 'dateOfBirth', required: true },
                 actionBar: { actions: ['today'] },
               }}
             />
@@ -91,7 +93,7 @@ export default function CreateEmployeeForm() {
               views={['year', 'month', 'day']}
               dayOfWeekFormatter={(date) => dayjs(date).format('ddd')}
               slotProps={{
-                textField: { id: 'startDate' },
+                textField: { id: 'startDate', required: true },
                 actionBar: { actions: ['today'] },
               }}
               onChange={(newValue) => setStartDate(newValue)}
@@ -106,6 +108,7 @@ export default function CreateEmployeeForm() {
                 id='street'
                 onChange={(e) => setStreet(e.target.value)}
                 value={street}
+                required
               />
               <label htmlFor='city'>City</label>
               <input
@@ -113,6 +116,7 @@ export default function CreateEmployeeForm() {
                 id='city'
                 onChange={(e) => setCity(e.target.value)}
                 value={city}
+                required
               />
               <label htmlFor='zipCode'>Zip Code</label>
               <input
@@ -120,6 +124,7 @@ export default function CreateEmployeeForm() {
                 id='zipCode'
                 onChange={(e) => setZipCode(e.target.value)}
                 value={zipCode}
+                required
               />
 
               <FormControl fullWidth margin='normal' required>
