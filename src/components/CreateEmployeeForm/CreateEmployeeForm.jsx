@@ -10,7 +10,7 @@ import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { US_STATES } from '../../constants/usStates';
 import {useDispatch} from "react-redux";
 import { addEmployee } from '../../store/employeesSlice';
-import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
+import ConfirmationModal from 'adaptive-modal-component';
 import { Link } from 'react-router-dom';
 
 

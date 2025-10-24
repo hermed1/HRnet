@@ -1,7 +1,8 @@
 // Table.jsx
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { TextField } from '@mui/material';
+import { IconButton, InputAdornment, TextField } from '@mui/material';
+import { MdSearch, MdClear } from 'react-icons/md';
 import { DataGrid } from '@mui/x-data-grid';
 import './Table.scss';
 
@@ -11,6 +12,14 @@ export default function Table() {
     );
 
     const [search, setSearch] = React.useState('');
+
+    const handleSearchChange = React.useCallback((event) => {
+        setSearch(event.target.value);
+    }, []);
+
+    const handleClearSearch = React.useCallback(() => {
+        setSearch('');
+    }, []);
 
     const columns = React.useMemo(
         () => [
@@ -60,17 +69,46 @@ export default function Table() {
         [search]
     );
 
+    const totalRows = rows.length;
+    const formattedCount = `${totalRows.toLocaleString()} ${totalRows === 1 ? 'employee' : 'employees'}`;
+
     return (
         <div className="data-table">
-            <div className="data-table__search">
-                <TextField
-                    fullWidth
-                    size="small"
-                    label="Search all columns"
-                    placeholder="Type to search…"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                />
+            <div className="data-table__toolbar">
+                <div className="data-table__toolbar-meta">
+                    <span className="data-table__title">Employee Directory</span>
+                    <span className="data-table__count">{formattedCount}</span>
+                </div>
+                <div className="data-table__toolbar-search">
+                    <TextField
+                        fullWidth
+                        size="small"
+                        label="Search"
+                        placeholder="Search by any value"
+                        value={search}
+                        onChange={handleSearchChange}
+                        className="data-table__search-input"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <MdSearch size={18} />
+                                </InputAdornment>
+                            ),
+                            endAdornment: search ? (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="Clear search"
+                                        size="small"
+                                        onClick={handleClearSearch}
+                                        edge="end"
+                                    >
+                                        <MdClear size={18} />
+                                    </IconButton>
+                                </InputAdornment>
+                            ) : undefined,
+                        }}
+                    />
+                </div>
             </div>
             <div className="data-table__grid-container">
                 <DataGrid

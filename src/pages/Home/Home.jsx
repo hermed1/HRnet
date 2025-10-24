@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './Home.css';
 import CreateEmployeeForm from '../../components/CreateEmployeeForm/CreateEmployeeForm';
 import { Link } from 'react-router-dom';
-import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
+import ConfirmationModal from 'adaptive-modal-component';
 
 export default function Home() {
     const [isOpen, setIsOpen] = useState(true);
