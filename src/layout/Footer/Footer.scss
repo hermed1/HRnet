@@ -1,0 +1,17 @@
+.footer {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 1.5rem 2rem;
+  margin-top: auto; // Push footer to the bottom
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}

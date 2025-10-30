@@ -7,7 +7,6 @@ export default function Home() {
   return (
     <div className='home'>
       <h1>HRnet</h1>
-      <Link to='/employees'>View Current Employees</Link>
       <h2>Create Employee</h2>
       <CreateEmployeeForm />
     </div>

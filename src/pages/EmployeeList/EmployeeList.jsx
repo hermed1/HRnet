@@ -8,8 +8,6 @@ import { Link } from 'react-router-dom';
 export default function EmployeeList() {
     return (
         <div>
-            EmployeeList
-            <Link to="/">dada</Link>
             <Table />
         </div>
     );

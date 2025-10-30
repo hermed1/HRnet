@@ -38,6 +38,12 @@
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
   }
 
+  // This is the part that works for alignment
+  .MuiSelect-select {
+    display: flex !important;
+    align-items: center !important;
+  }
+
   &__submitBtn {
     align-self: center;
     padding: 10px 20px;

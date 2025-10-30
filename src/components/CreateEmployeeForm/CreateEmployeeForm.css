@@ -37,6 +37,10 @@
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
 }
+.createEmployeeForm .MuiSelect-select {
+  display: flex !important;
+  align-items: center !important;
+}
 .createEmployeeForm__submitBtn {
   align-self: center;
   padding: 10px 20px;
@@ -71,6 +75,4 @@
   color: #6b7280;
   padding: 0 4px;
   margin-bottom: 4px;
-}
-
-/*# sourceMappingURL=CreateEmployeeForm.css.map */
+}/*# sourceMappingURL=CreateEmployeeForm.css.map */
