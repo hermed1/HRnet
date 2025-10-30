@@ -3,8 +3,8 @@
 // Définition de variables pour une maintenance facile
 $table-bg-color: #ffffff;
 $header-bg-color: #f9fafb;
-$row-hover-bg-color: #f0f4ff;
-$row-striped-bg-color: #f9fafb;
+$row-hover-bg-color: #e6f0ff;
+$row-striped-bg-color: #f8faff;
 $border-color: #e5e7eb;
 $shadow-color: rgba(0, 0, 0, 0.05);
 $primary-text-color: #111827;
@@ -44,14 +44,24 @@ $secondary-text-color: #6b7280;
   }
 
   &__title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: $primary-text-color;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #0d6efd, #20c997);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
   }
 
   &__count {
     font-size: 0.875rem;
     color: $secondary-text-color;
+
+    &-number {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0d6efd; // Primary blue color
+    }
   }
 
   &__toolbar-search {
@@ -74,8 +84,8 @@ $secondary-text-color: #6b7280;
       }
 
       &.Mui-focused .MuiOutlinedInput-notchedOutline {
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
       }
     }
 

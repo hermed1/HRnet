@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 function loadEmployees() {
-
   try {
     const storedValue = window.localStorage.getItem('employees');
     if (!storedValue) {
@@ -11,6 +10,7 @@ function loadEmployees() {
     const parsedValue = JSON.parse(storedValue);
     return Array.isArray(parsedValue) ? parsedValue : [];
   } catch (error) {
+    console.error(error);
     return [];
   }
 }
@@ -26,7 +26,7 @@ const employeesSlice = createSlice({
       try {
         window.localStorage.setItem('employees', JSON.stringify(state.list));
       } catch (error) {
-          console.error(error);
+        console.error(error);
       }
     },
   },

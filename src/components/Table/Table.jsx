@@ -79,7 +79,12 @@ console.log("emp", employees);
     );
 
     const totalRows = rows.length;
-    const formattedCount = `${totalRows.toLocaleString()} ${totalRows === 1 ? 'employee' : 'employees'}`;
+    const formattedCount = (
+        <>
+            <span className="data-table__count-number">{totalRows.toLocaleString()}</span>{' '}
+            {totalRows === 1 ? 'employee' : 'employees'}
+        </>
+    );
 
     return (
         <div className="data-table">
