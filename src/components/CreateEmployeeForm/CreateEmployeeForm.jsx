@@ -82,7 +82,9 @@ export default function CreateEmployeeForm() {
               onChange={(newValue) => setDateOfBirth(newValue)}
               views={['year', 'month', 'day']}
               dayOfWeekFormatter={(date) => dayjs(date).format('ddd')}
+              //personnaliser des éléments internes du DatePicker. Passer des props aux sous-composants via slotProps//
               slotProps={{
+                  //relier le label externe (<label htmlFor='dateOfBirth'>) à l'input pour l'accessibilité et le focus clavier ;
                 textField: { id: 'dateOfBirth', required: true },
                 actionBar: { actions: ['today'] },
               }}

@@ -1,5 +1,5 @@
 // Table.jsx
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
 import { MdSearch, MdClear } from 'react-icons/md';
@@ -8,20 +8,21 @@ import './Table.scss';
 
 export default function Table() {
     const employees = useSelector(
-        (state) => state.employees?.list ?? state.employees?.items ?? state.employees ?? []
+        (state) => state.employees?.list ?? []
     );
+console.log("emp", employees);
+    const [search, setSearch] = useState('');
 
-    const [search, setSearch] = React.useState('');
-
-    const handleSearchChange = React.useCallback((event) => {
+    const handleSearchChange = (event) => {
         setSearch(event.target.value);
-    }, []);
+    };
 
-    const handleClearSearch = React.useCallback(() => {
+    const handleClearSearch = () => {
         setSearch('');
-    }, []);
-
-    const columns = React.useMemo(
+    };
+//useMemo  pour mémoriser les colonnes et les lignes afin d'optimiser les performances
+// en évitant les recalculs inutiles lors des rendus si les dépendances n'ont pas changé.
+    const columns = useMemo(
         () => [
             { field: 'firstName', headerName: 'First Name', flex: 1, minWidth: 130, hideable: false },
             { field: 'lastName', headerName: 'Last Name', flex: 1, minWidth: 130, hideable: false },
@@ -52,16 +53,24 @@ export default function Table() {
         []
     );
 
-    const rows = React.useMemo(
-        () =>
-            (employees || []).map((emp, idx) => ({
-                id: emp.id ?? `${emp.firstName}-${emp.lastName}-${idx}`,
-                ...emp,
-            })),
+    // const rows = useMemo(
+    //     () =>
+    //         employees.map((employee, index) => ({
+    //             id: employee.id ?? `${employee.firstName}-${employee.lastName}-${index}`,
+    //             ...employee,
+    //         })),
+    //     [employees]
+    // );
+    //useMemo, recalcul si le tableau employees change
+    const rows = useMemo(
+        () => employees.map((employee, index) => ({
+            id: index,
+            ...employee,
+        })),
         [employees]
     );
 
-    const filterModel = React.useMemo(
+    const filterModel = useMemo(
         () => ({
             items: [],
             quickFilterValues: search ? [search] : [],

@@ -16,7 +16,7 @@
     "@mui/x-data-grid": "^8.14.1",
     "@mui/x-date-pickers": "^8.10.0",
     "@reduxjs/toolkit": "^2.9.0",
-    "adaptive-modal-component": "^1.0.1",
+    "adaptive-modal-component": "^1.0.2",
     "dayjs": "^1.11.13",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

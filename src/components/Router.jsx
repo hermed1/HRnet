@@ -6,10 +6,10 @@ import EmployeeList from '../pages/EmployeeList/EmployeeList';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <Layout />, // Layout commun à toutes les pages
     children: [
-      { index: true, element: <Home /> },
-      { path: 'employees', element: <EmployeeList /> },
+      { index: true, element: <Home /> }, // Page d'accueil - création d'employés
+      { path: 'employees', element: <EmployeeList /> }, // Liste des employés
     ],
   },
 ]);
