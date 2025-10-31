@@ -22,6 +22,7 @@ const employeesSlice = createSlice({
   },
   reducers: {
     addEmployee: (state, action) => {
+        //action = objet qui contient les données pour modifier le state
       state.list.push(action.payload);
       try {
         window.localStorage.setItem('employees', JSON.stringify(state.list));
